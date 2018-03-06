@@ -65,7 +65,7 @@ void MotorDriver::adjustLeftSpeed(int delta) {
         newSpeed = 0;
     }
 
-    analogWrite(_enA, speed - motorABias);
+    analogWrite(_enA, newSpeed - motorABias);
 }
 
 void MotorDriver::adjustRightSpeed(int delta) {
@@ -79,7 +79,7 @@ void MotorDriver::adjustRightSpeed(int delta) {
         newSpeed = 0;
     }
 
-    analogWrite(_enB, speed - motorBBias);
+    analogWrite(_enB, newSpeed - motorBBias);
 }
 
 void MotorDriver::turnLeft() {

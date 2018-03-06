@@ -1,14 +1,7 @@
 #include "MotorDriver.h"
 #include "LSA.h"
+#include "BallDropper.h"
 
-/*
- * TODO:
- * add ball drop
- *
- * turn
- *
- * clean up state machine outline
- */
 
 // enumerating machine states
 enum State {
@@ -44,12 +37,16 @@ const int north = A2;
 const float Kp = 4.0;
 const float Kd = 4.0;
 
+// ball dropper pin
+const int dropperPin = A3;
+
 // timer intervals
 const int pdInterval = 2000;
 
 // robot controllers
 MotorDriver driver = MotorDriver(enA, in1, in2, in3, in4, enB);
 LSA lsa = LSA(follow1, follow2, north);
+BallDropper dropper = BallDropper(dropperPin);
 
 // interval timers
 IntervalTimer pdTimer;
@@ -73,7 +70,7 @@ void loop() {
             // drop balls into funding round A
             driver.stop();
             // TODO move transition to checkState()
-            // TODO drop balls
+            dropper.dropBalls(1);
             state = APPROACHING_PATENT;
             // continue forward after balls dropped
             driver.driveForward(baseSpeed);
@@ -92,7 +89,7 @@ void loop() {
             // drop balls into funding round B
             driver.stop();
             // TODO move state transtition to checkState()
-            // TODO drop balls
+            dropper.dropBalls(1);
             state = APPROACHING_TURN;
             // continue forward after balls dropped
             driver.driveForward(baseSpeed);
