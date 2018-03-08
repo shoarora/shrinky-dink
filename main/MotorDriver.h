@@ -23,7 +23,7 @@ class MotorDriver {
         void adjustRightSpeed(int delta);
 
         // 90-degree turns
-        void turnRight();
+        void turnRight(int speed);
         void turnLeft();
 
     private:

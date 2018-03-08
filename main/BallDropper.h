@@ -18,6 +18,7 @@ class BallDropper {
     private:
 
         void dropBall();
+        void rewindServo();
 
         int _pin;
         int _pos;

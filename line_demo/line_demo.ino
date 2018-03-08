@@ -1,6 +1,6 @@
-const int line_pin1 = A2;
+const int line_pin1 = A0;
 const int line_pin2 = A1;
-const int line_pin3 = A0;
+const int line_pin3 = A2;
 
 
 void setup() {

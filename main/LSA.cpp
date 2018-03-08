@@ -5,7 +5,7 @@
 #include "Arduino.h"
 #include "LSA.h"
 
-const int SENSOR_THRESHOLD = 25;
+const int SENSOR_THRESHOLD = 850;
 const int ERROR_BIAS = 0;
 
 LSA::LSA(int follow1, int follow2, int north) {
@@ -14,6 +14,9 @@ LSA::LSA(int follow1, int follow2, int north) {
     _follow2 = follow2;
     _north = north;
     _lastErr = 0;
+    pinMode(follow1, INPUT);
+    pinMode(follow2, INPUT);
+    pinMode(north, INPUT);
 }
 
 int LSA::calculatePD(float Kp, float Kd) {
@@ -27,11 +30,11 @@ int LSA::calculatePD(float Kp, float Kd) {
 bool LSA::isSensorReading(int i) {
     switch (i) {
         case 1:
-            return analogRead(_follow1) > SENSOR_THRESHOLD;
+            return analogRead(_follow1) < SENSOR_THRESHOLD;
         case 2:
-            return analogRead(_follow2) > SENSOR_THRESHOLD;
+            return analogRead(_follow2) < SENSOR_THRESHOLD;
         case 3:
-            return analogRead(_north) > SENSOR_THRESHOLD;
+            return analogRead(_north) < SENSOR_THRESHOLD;
         default:
             return false;
     }
