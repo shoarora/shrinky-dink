@@ -5,7 +5,7 @@
 #include "Arduino.h"
 #include "LSA.h"
 
-const int SENSOR_THRESHOLD = 850;
+const int SENSOR_THRESHOLD = 740;
 const int ERROR_BIAS = 0;
 
 LSA::LSA(int follow1, int follow2, int north) {

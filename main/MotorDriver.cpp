@@ -7,7 +7,7 @@
 #include "MotorDriver.h"
 
 const int motorABias = 0;
-const int motorBBias = 30;
+const int motorBBias = 60;
 
 MotorDriver::MotorDriver(int enA, int in1, int in2, int in3, int in4, int enB) {
     // save pin info
@@ -105,6 +105,6 @@ void MotorDriver::turnRight(int speed) {
     analogWrite(_enA, speed - motorABias);
     analogWrite(_enB, speed - motorBBias);
 
-    delay(1600);
+    delay(1500);
     stop();
 }
