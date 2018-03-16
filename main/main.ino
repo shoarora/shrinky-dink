@@ -37,7 +37,6 @@ const int follow2 = A1;
 const int north = A2;
 
 // PD constants
-// TODO tune these
 //const float Kp = 0.0625;
 //const float Kd = 0.05;
 
@@ -70,14 +69,20 @@ void setup() {
 }
 
 void loop() {
+    dropper.dropBalls(1);
+    delay(10000);
+}
+
+void loop2() {
     checkState();
+    Serial.println(analogRead(follow2));
     switch (state) {
         case APPROACHING_START:
             driver.driveForward(baseSpeed);
             break;
         case AT_START:
             state = APPROACHING_A;
-            delay(500);
+            delay(750);
             break;
         case APPROACHING_A:
             // drive forward until arrived at funding round A
@@ -86,7 +91,6 @@ void loop() {
         case AT_A:
             // drop balls into funding round A
             driver.stop();
-            // TODO move transition to checkState()
             dropper.dropBalls(1);
             state = APPROACHING_PATENT;
             // continue forward after balls dropped
@@ -113,7 +117,6 @@ void loop() {
         case AT_B:
             // drop balls into funding round B
             driver.stop();
-            // TODO move state transtition to checkState()
             dropper.dropBalls(1);
             state = APPROACHING_TURN;
             // continue forward after balls dropped
@@ -126,13 +129,10 @@ void loop() {
         case TURNING:
             // turn right toward opponent's garage
             driver.turnRight(baseSpeed);
-            // TODO move state transition to checkState()
             state = INVADING;
             break;
         case INVADING:
             // invade
-            // TODO move state transition to checkState()
-            // TODO figure out when done
             driver.driveForward(baseSpeed);
             delay(9000);
             state = DONE;
